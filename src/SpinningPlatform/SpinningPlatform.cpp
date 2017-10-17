@@ -54,6 +54,17 @@ void SpinningPlatform::setup()
   // Parameters
 
   // Functions
+  modular_server::Function & get_platform_position_function = modular_server_.createFunction(constants::get_platform_position_function_name);
+  get_platform_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PlatformController::getPlatformPositionHandler));
+  get_platform_position_function.setResultTypeLong();
+
+  modular_server::Function & get_platform_target_position_function = modular_server_.createFunction(constants::get_platform_target_position_function_name);
+  get_platform_target_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PlatformController::getPlatformTargetPositionHandler));
+  get_platform_target_position_function.setResultTypeLong();
+
+  modular_server::Function & platform_at_target_position_function = modular_server_.createFunction(constants::platform_at_target_position_function_name);
+  platform_at_target_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PlatformController::platformAtTargetPositionHandler));
+  platform_at_target_position_function.setResultTypeBool();
 
   // Callbacks
 

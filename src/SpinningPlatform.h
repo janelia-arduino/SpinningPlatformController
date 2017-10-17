@@ -45,6 +45,9 @@ private:
   modular_server::Callback callbacks_[spinning_platform::constants::CALLBACK_COUNT_MAX];
 
   // Handlers
+  void getPlatformPositionHandler();
+  void getPlatformTargetPositionHandler();
+  void platformAtTargetPositionHandler();
 
 };
 
