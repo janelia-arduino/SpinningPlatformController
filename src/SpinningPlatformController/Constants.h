@@ -5,14 +5,14 @@
 // Authors:
 // Peter Polidoro polidorop@janelia.hhmi.org
 // ----------------------------------------------------------------------------
-#ifndef SPINNING_PLATFORM_CONSTANTS_H
-#define SPINNING_PLATFORM_CONSTANTS_H
+#ifndef SPINNING_PLATFORM_CONTROLLER_CONSTANTS_H
+#define SPINNING_PLATFORM_CONTROLLER_CONSTANTS_H
 #include <ConstantVariable.h>
 #include <StepDirController.h>
 #include <StepperController.h>
 
 
-namespace spinning_platform
+namespace spinning_platform_controller
 {
 namespace constants
 {

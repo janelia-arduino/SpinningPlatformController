@@ -1,20 +1,20 @@
 // ----------------------------------------------------------------------------
-// SpinningPlatform.cpp
+// SpinningPlatformController.cpp
 //
 //
 // Authors:
 // Peter Polidoro polidorop@janelia.hhmi.org
 // ----------------------------------------------------------------------------
-#include "../SpinningPlatform.h"
+#include "../SpinningPlatformController.h"
 
 
-using namespace spinning_platform;
+using namespace spinning_platform_controller;
 
-SpinningPlatform::SpinningPlatform()
+SpinningPlatformController::SpinningPlatformController()
 {
 }
 
-void SpinningPlatform::setup()
+void SpinningPlatformController::setup()
 {
   // Parent Setup
   StepperController::setup();

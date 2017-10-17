@@ -5,14 +5,14 @@
 // Authors:
 // Peter Polidoro polidorop@janelia.hhmi.org
 // ----------------------------------------------------------------------------
-#ifndef SPINNING_PLATFORM_5X3_CONSTANTS_H
-#define SPINNING_PLATFORM_5X3_CONSTANTS_H
+#ifndef SPINNING_PLATFORM_CONTROLLER_5X3_CONSTANTS_H
+#define SPINNING_PLATFORM_CONTROLLER_5X3_CONSTANTS_H
 #include "Constants.h"
 
 
 #if defined(__MK64FX512__)
 
-namespace spinning_platform
+namespace spinning_platform_controller
 {
 namespace constants
 {

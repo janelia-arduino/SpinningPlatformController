@@ -19,10 +19,10 @@
 #include <ModularDeviceBase.h>
 #include <StepDirController.h>
 #include <StepperController.h>
-#include <SpinningPlatform.h>
+#include <SpinningPlatformController.h>
 
 
-SpinningPlatform dev;
+SpinningPlatformController dev;
 
 void setup()
 {

@@ -8,13 +8,13 @@
 #include "Constants.h"
 
 
-namespace spinning_platform
+namespace spinning_platform_controller
 {
 namespace constants
 {
-CONSTANT_STRING(device_name,"spinning_platform");
+CONSTANT_STRING(device_name,"spinning_platform_controller");
 
-CONSTANT_STRING(firmware_name,"SpinningPlatform");
+CONSTANT_STRING(firmware_name,"SpinningPlatformController");
 // Use semantic versioning http://semver.org/
 const modular_server::FirmwareInfo firmware_info =
   {

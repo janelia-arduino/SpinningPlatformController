@@ -10,7 +10,7 @@
 
 #if defined(__MK64FX512__)
 
-namespace spinning_platform
+namespace spinning_platform_controller
 {
 namespace constants
 {

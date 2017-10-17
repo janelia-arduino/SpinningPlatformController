@@ -5,14 +5,14 @@
 // Authors:
 // Peter Polidoro polidorop@janelia.hhmi.org
 // ----------------------------------------------------------------------------
-#ifndef SPINNING_PLATFORM_3X2_CONSTANTS_H
-#define SPINNING_PLATFORM_3X2_CONSTANTS_H
+#ifndef SPINNING_PLATFORM_CONTROLLER_3X2_CONSTANTS_H
+#define SPINNING_PLATFORM_CONTROLLER_3X2_CONSTANTS_H
 #include "Constants.h"
 
 
 #if defined(__MK20DX256__)
 
-namespace spinning_platform
+namespace spinning_platform_controller
 {
 namespace constants
 {

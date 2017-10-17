@@ -1,4 +1,4 @@
-# SpinningPlatform
+# SpinningPlatformController
 
 Authors:
 
