@@ -26,12 +26,13 @@
 
 #include <ModularServer.h>
 #include <ModularDeviceBase.h>
-#include <Parent.h>
+#include <StepDirController.h>
+#include <StepperController.h>
 
 #include "SpinningPlatform/Constants.h"
 
 
-class SpinningPlatform : public Parent
+class SpinningPlatform : public StepperController
 {
 public:
   SpinningPlatform();

@@ -14,7 +14,9 @@ License:
 
 [ModularDeviceBase](https://github.com/janelia-arduino/ModularDeviceBase)
 
-[Parent](https://github.com/janelia-arduino/Parent)
+[StepDirController](https://github.com/janelia-arduino/StepDirController)
+
+[StepperController](https://github.com/janelia-arduino/StepperController)
 
 ## Clients
 
@@ -22,7 +24,7 @@ License:
 
 [modular_device_base](https://github.com/janelia-modular-devices/modular_device_base.git)
 
-[parent](https://github.com/janelia-modular-devices/parent.git)
+[stepper_controller](https://github.com/janelia-modular-devices/stepper_controller.git)
 
 ## API NAMES
 

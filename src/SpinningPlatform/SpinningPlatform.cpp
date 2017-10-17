@@ -17,7 +17,7 @@ SpinningPlatform::SpinningPlatform()
 void SpinningPlatform::setup()
 {
   // Parent Setup
-  Parent::setup();
+  StepperController::setup();
 
   // Variable Setup
 
@@ -36,12 +36,28 @@ void SpinningPlatform::setup()
                               callbacks_);
 
   // Properties
+  modular_server::Property & channel_count_property = modular_server_.property(step_dir_controller::constants::channel_count_property_name);
+  channel_count_property.setDefaultValue(constants::channel_count);
+  channel_count_property.setValue(constants::channel_count);
+  channel_count_property.setRange(step_dir_controller::constants::channel_count_min,constants::channel_count);
+
+  modular_server::Property & steps_per_position_units_property = modular_server_.property(step_dir_controller::constants::steps_per_position_units_property_name);
+  steps_per_position_units_property.setDefaultValue(constants::steps_per_position_units_default);
+  steps_per_position_units_property.setValue(constants::steps_per_position_units_default);
+  steps_per_position_units_property.setRange(constants::steps_per_position_units,constants::steps_per_position_units);
+
+  modular_server::Property & microsteps_per_step_property = modular_server_.property(stepper_controller::constants::microsteps_per_step_property_name);
+  microsteps_per_step_property.setDefaultValue(constants::microsteps_per_step_default);
+  microsteps_per_step_property.setValue(constants::microsteps_per_step_default);
+  microsteps_per_step_property.setRange(constants::microsteps_per_step,constants::microsteps_per_step);
 
   // Parameters
 
   // Functions
 
   // Callbacks
+
+  zeroAll();
 }
 
 // Handlers must be non-blocking (avoid 'delay')

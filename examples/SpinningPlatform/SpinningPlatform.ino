@@ -17,7 +17,8 @@
 
 #include <ModularServer.h>
 #include <ModularDeviceBase.h>
-#include <Parent.h>
+#include <StepDirController.h>
+#include <StepperController.h>
 #include <SpinningPlatform.h>
 
 
