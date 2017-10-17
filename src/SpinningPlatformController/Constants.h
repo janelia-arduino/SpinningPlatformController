@@ -19,7 +19,7 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=1};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=3};
+enum{FUNCTION_COUNT_MAX=4};
 enum{CALLBACK_COUNT_MAX=1};
 
 extern ConstantString device_name;

@@ -55,20 +55,41 @@ void SpinningPlatformController::setup()
 
   // Functions
   modular_server::Function & get_platform_position_function = modular_server_.createFunction(constants::get_platform_position_function_name);
-  get_platform_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PlatformController::getPlatformPositionHandler));
+  get_platform_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&SpinningPlatformController::getPlatformPositionHandler));
   get_platform_position_function.setResultTypeLong();
 
   modular_server::Function & get_platform_target_position_function = modular_server_.createFunction(constants::get_platform_target_position_function_name);
-  get_platform_target_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PlatformController::getPlatformTargetPositionHandler));
+  get_platform_target_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&SpinningPlatformController::getPlatformTargetPositionHandler));
   get_platform_target_position_function.setResultTypeLong();
 
   modular_server::Function & platform_at_target_position_function = modular_server_.createFunction(constants::platform_at_target_position_function_name);
-  platform_at_target_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PlatformController::platformAtTargetPositionHandler));
+  platform_at_target_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&SpinningPlatformController::platformAtTargetPositionHandler));
   platform_at_target_position_function.setResultTypeBool();
 
   // Callbacks
 
   zeroAll();
+}
+
+long SpinningPlatformController::getPlatformPosition()
+{
+  long platform_position = getPosition(constants::platform_channel);
+  platform_position = platform_position/constants::microsteps_per_platform_rev;
+
+  return platform_position;
+}
+
+long SpinningPlatformController::getPlatformTargetPosition()
+{
+  long platform_position = getTargetPosition(constants::platform_channel);
+  platform_position = platform_position/constants::microsteps_per_platform_rev;
+
+  return platform_position;
+}
+
+bool SpinningPlatformController::platformAtTargetPosition()
+{
+  return atTargetPosition(constants::platform_channel);
 }
 
 // Handlers must be non-blocking (avoid 'delay')
@@ -87,3 +108,21 @@ void SpinningPlatformController::setup()
 // modular_server_.property(property_name).setValue(value) value type must match the property default type
 // modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
+
+void SpinningPlatformController::getPlatformPositionHandler()
+{
+  long platform_position = getPlatformPosition();
+  modular_server_.response().returnResult(platform_position);
+}
+
+void SpinningPlatformController::getPlatformTargetPositionHandler()
+{
+  long target_position = getPlatformTargetPosition();
+  modular_server_.response().returnResult(target_position);
+}
+
+void SpinningPlatformController::platformAtTargetPositionHandler()
+{
+  bool platform_at_target_position = platformAtTargetPosition();
+  modular_server_.response().returnResult(platform_at_target_position);
+}
