@@ -27,6 +27,13 @@ void SpinningPlatformController::setup()
   // Add Hardware
 
   // Interrupts
+  modular_server::Interrupt & bnc_a_interrupt = modular_server_.interrupt(modular_device_base::constants::bnc_a_interrupt_name);
+  modular_server::Interrupt & btn_a_interrupt = modular_server_.interrupt(modular_device_base::constants::btn_a_interrupt_name);
+
+#if defined(__MK64FX512__)
+  modular_server::Interrupt & bnc_b_interrupt = modular_server_.interrupt(modular_device_base::constants::bnc_b_interrupt_name);
+  modular_server::Interrupt & btn_b_interrupt = modular_server_.interrupt(modular_device_base::constants::btn_b_interrupt_name);
+#endif
 
   // Add Firmware
   modular_server_.addFirmware(constants::firmware_info,
@@ -51,9 +58,20 @@ void SpinningPlatformController::setup()
   microsteps_per_step_property.setValue(constants::microsteps_per_step_default);
   microsteps_per_step_property.setRange(constants::microsteps_per_step,constants::microsteps_per_step);
 
+  modular_server_.createProperty(constants::platform_position_min_property_name,constants::platform_position_min_default);
+
+  modular_server_.createProperty(constants::platform_position_max_property_name,constants::platform_position_max_default);
+
   // Parameters
+  modular_server::Parameter & platform_position_parameter = modular_server_.createParameter(constants::platform_position_parameter_name);
+  platform_position_parameter.setTypeLong();
 
   // Functions
+  modular_server::Function & move_platform_softly_to_function = modular_server_.createFunction(constants::move_platform_softly_to_function_name);
+  move_platform_softly_to_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&SpinningPlatformController::movePlatformSoftlyToHandler));
+  move_platform_softly_to_function.addParameter(platform_position_parameter);
+  move_platform_softly_to_function.setResultTypeBool();
+
   modular_server::Function & get_platform_position_function = modular_server_.createFunction(constants::get_platform_position_function_name);
   get_platform_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&SpinningPlatformController::getPlatformPositionHandler));
   get_platform_position_function.setResultTypeLong();
@@ -67,14 +85,33 @@ void SpinningPlatformController::setup()
   platform_at_target_position_function.setResultTypeBool();
 
   // Callbacks
+  modular_server::Callback & increment_platform_target_position_callback = modular_server_.createCallback(constants::increment_platform_target_position_callback_name);
+  increment_platform_target_position_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&SpinningPlatformController::incrementPlatformTargetPositionHandler));
+  increment_platform_target_position_callback.attachTo(bnc_a_interrupt,modular_server::interrupt::mode_falling);
+  increment_platform_target_position_callback.attachTo(btn_a_interrupt,modular_server::interrupt::mode_falling);
+
+  modular_server::Callback & decrement_platform_target_position_callback = modular_server_.createCallback(constants::decrement_platform_target_position_callback_name);
+  decrement_platform_target_position_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&SpinningPlatformController::decrementPlatformTargetPositionHandler));
+#if defined(__MK64FX512__)
+  decrement_platform_target_position_callback.attachTo(bnc_b_interrupt,modular_server::interrupt::mode_falling);
+  decrement_platform_target_position_callback.attachTo(btn_b_interrupt,modular_server::interrupt::mode_falling);
+#endif
 
   zeroAll();
+}
+
+bool SpinningPlatformController::movePlatformSoftlyTo(const long absolute_platform_position)
+{
+  long position = limitedPlatformPosition(absolute_platform_position);
+  position = platformPositionToPosition(position);
+  moveSoftlyTo(constants::platform_channel,position);
+  return true;
 }
 
 long SpinningPlatformController::getPlatformPosition()
 {
   long platform_position = getPosition(constants::platform_channel);
-  platform_position = platform_position/constants::microsteps_per_platform_rev;
+  platform_position = positionToPlatformPosition(platform_position);
 
   return platform_position;
 }
@@ -82,7 +119,7 @@ long SpinningPlatformController::getPlatformPosition()
 long SpinningPlatformController::getPlatformTargetPosition()
 {
   long platform_position = getTargetPosition(constants::platform_channel);
-  platform_position = platform_position/constants::microsteps_per_platform_rev;
+  platform_position = positionToPlatformPosition(platform_position);
 
   return platform_position;
 }
@@ -90,6 +127,53 @@ long SpinningPlatformController::getPlatformTargetPosition()
 bool SpinningPlatformController::platformAtTargetPosition()
 {
   return atTargetPosition(constants::platform_channel);
+}
+
+long SpinningPlatformController::incrementPlatformTargetPosition()
+{
+  long target_position = getPlatformTargetPosition();
+  ++target_position;
+  movePlatformSoftlyTo(target_position);
+  return target_position;
+}
+
+long SpinningPlatformController::decrementPlatformTargetPosition()
+{
+  long target_position = getPlatformTargetPosition();
+  --target_position;
+  movePlatformSoftlyTo(target_position);
+  return target_position;
+}
+
+long SpinningPlatformController::platformPositionToPosition(const long position)
+{
+  return position*constants::microsteps_per_platform_rev;
+}
+
+long SpinningPlatformController::positionToPlatformPosition(const long position)
+{
+  return position/constants::microsteps_per_platform_rev;
+}
+
+long SpinningPlatformController::limitedPlatformPosition(const long absolute_platform_position)
+{
+  long platform_position_min;
+  modular_server_.property(constants::platform_position_min_property_name).getValue(platform_position_min);
+
+  long platform_position_max;
+  modular_server_.property(constants::platform_position_max_property_name).getValue(platform_position_max);
+
+  long new_position = absolute_platform_position;
+
+  if (new_position < platform_position_min)
+  {
+    new_position = platform_position_min;
+  }
+  else if (new_position > platform_position_max)
+  {
+    new_position = platform_position_max;
+  }
+  return new_position;
 }
 
 // Handlers must be non-blocking (avoid 'delay')
@@ -109,6 +193,15 @@ bool SpinningPlatformController::platformAtTargetPosition()
 // modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
 
+void SpinningPlatformController::movePlatformSoftlyToHandler()
+{
+  long platform_position;
+  modular_server_.parameter(constants::platform_position_parameter_name).getValue(platform_position);
+
+  bool moving = movePlatformSoftlyTo(platform_position);
+  modular_server_.response().returnResult(moving);
+}
+
 void SpinningPlatformController::getPlatformPositionHandler()
 {
   long platform_position = getPlatformPosition();
@@ -125,4 +218,14 @@ void SpinningPlatformController::platformAtTargetPositionHandler()
 {
   bool platform_at_target_position = platformAtTargetPosition();
   modular_server_.response().returnResult(platform_at_target_position);
+}
+
+void SpinningPlatformController::incrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr)
+{
+  incrementPlatformTargetPosition();
+}
+
+void SpinningPlatformController::decrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr)
+{
+  decrementPlatformTargetPosition();
 }

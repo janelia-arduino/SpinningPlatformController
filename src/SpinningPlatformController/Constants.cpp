@@ -50,15 +50,24 @@ const long microsteps_per_step_default[CHANNEL_COUNT] =
    microsteps_per_step,
   };
 
+CONSTANT_STRING(platform_position_min_property_name,"platformPositionMin");
+const long platform_position_min_default = -50;
+
+CONSTANT_STRING(platform_position_max_property_name,"platformPositionMax");
+const long platform_position_max_default = 50;
+
 // Parameters
-CONSTANT_STRING(stage_position_parameter_name,"stage_position");
+CONSTANT_STRING(platform_position_parameter_name,"platform_position");
 
 // Functions
+CONSTANT_STRING(move_platform_softly_to_function_name,"movePlatformSoftlyTo");
 CONSTANT_STRING(get_platform_position_function_name,"getPlatformPosition");
 CONSTANT_STRING(get_platform_target_position_function_name,"getPlatformTargetPosition");
 CONSTANT_STRING(platform_at_target_position_function_name,"platformAtTargetPosition");
 
 // Callbacks
+CONSTANT_STRING(increment_platform_target_position_callback_name,"incrementPlatformTargetPosition");
+CONSTANT_STRING(decrement_platform_target_position_callback_name,"decrementPlatformTargetPosition");
 
 // Errors
 }

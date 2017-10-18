@@ -38,9 +38,17 @@ public:
   SpinningPlatformController();
   virtual void setup();
 
+  bool movePlatformSoftlyTo(const long absolute_platform_position);
   long getPlatformPosition();
   long getPlatformTargetPosition();
   bool platformAtTargetPosition();
+
+  long incrementPlatformTargetPosition();
+  long decrementPlatformTargetPosition();
+
+  long platformPositionToPosition(const long platform_position);
+  long positionToPlatformPosition(const long position);
+  long limitedPlatformPosition(const long absolute_platform_position);
 
 private:
   modular_server::Property properties_[spinning_platform_controller::constants::PROPERTY_COUNT_MAX];
@@ -49,9 +57,12 @@ private:
   modular_server::Callback callbacks_[spinning_platform_controller::constants::CALLBACK_COUNT_MAX];
 
   // Handlers
+  void movePlatformSoftlyToHandler();
   void getPlatformPositionHandler();
   void getPlatformTargetPositionHandler();
   void platformAtTargetPositionHandler();
+  void incrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr);
+  void decrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr);
 
 };
 
