@@ -29,6 +29,30 @@ License:
 ## API NAMES
 
 ```json
+{
+  "id":"getApi",
+  "result":{
+    "firmware":["SpinningPlatformController"],
+    "verbosity":"NAMES",
+    "functions":[
+      "movePlatformSoftlyTo",
+      "getPlatformPosition",
+      "getPlatformTargetPosition",
+      "platformAtTargetPosition"
+    ],
+    "parameters":[
+      "platform_position"
+    ],
+    "properties":[
+      "platformPositionMin",
+      "platformPositionMax"
+    ],
+    "callbacks":[
+      "incrementPlatformTargetPosition",
+      "decrementPlatformTargetPosition"
+    ]
+  }
+}
 ```
 
 ## API GENERAL
