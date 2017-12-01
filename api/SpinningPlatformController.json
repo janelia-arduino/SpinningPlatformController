@@ -1,189 +1,191 @@
 {
-  "id":"getApi",
-  "result":{
-    "firmware":["SpinningPlatformController"],
-    "verbosity":"GENERAL",
-    "functions":[
+  "id": "getApi",
+  "result": {
+    "firmware": [
+      "SpinningPlatformController"
+    ],
+    "verbosity": "GENERAL",
+    "functions": [
       {
-        "name":"movePlatformSoftlyTo",
-        "parameters":[
+        "name": "movePlatformSoftlyTo",
+        "parameters": [
           "platform_position"
         ],
-        "result_info":{
-          "type":"bool"
+        "result_info": {
+          "type": "bool"
         }
       },
       {
-        "name":"getPlatformPosition",
-        "result_info":{
-          "type":"long"
+        "name": "getPlatformPosition",
+        "result_info": {
+          "type": "long"
         }
       },
       {
-        "name":"getPlatformTargetPosition",
-        "result_info":{
-          "type":"long"
+        "name": "getPlatformTargetPosition",
+        "result_info": {
+          "type": "long"
         }
       },
       {
-        "name":"platformAtTargetPosition",
-        "result_info":{
-          "type":"bool"
+        "name": "platformAtTargetPosition",
+        "result_info": {
+          "type": "bool"
         }
       }
     ],
-    "parameters":[
+    "parameters": [
       {
-        "name":"platform_position",
-        "type":"long"
+        "name": "platform_position",
+        "type": "long"
       }
     ],
-    "properties":[
+    "properties": [
       {
-        "name":"platformPositionMin",
-        "type":"long",
-        "functions":[
+        "name": "platformPositionMin",
+        "type": "long",
+        "functions": [
           {
-            "name":"getValue",
-            "result_info":{
-              "type":"long"
+            "name": "getValue",
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setValue",
-            "parameters":[
+            "name": "setValue",
+            "parameters": [
               "value"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"getDefaultValue",
-            "result_info":{
-              "type":"long"
+            "name": "getDefaultValue",
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setValueToDefault",
-            "result_info":{
-              "type":"long"
+            "name": "setValueToDefault",
+            "result_info": {
+              "type": "long"
             }
           }
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"value",
-            "type":"long"
+            "name": "value",
+            "type": "long"
           }
         ]
       },
       {
-        "name":"platformPositionMax",
-        "type":"long",
-        "functions":[
+        "name": "platformPositionMax",
+        "type": "long",
+        "functions": [
           {
-            "name":"getValue",
-            "result_info":{
-              "type":"long"
+            "name": "getValue",
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setValue",
-            "parameters":[
+            "name": "setValue",
+            "parameters": [
               "value"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"getDefaultValue",
-            "result_info":{
-              "type":"long"
+            "name": "getDefaultValue",
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setValueToDefault",
-            "result_info":{
-              "type":"long"
+            "name": "setValueToDefault",
+            "result_info": {
+              "type": "long"
             }
           }
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"value",
-            "type":"long"
+            "name": "value",
+            "type": "long"
           }
         ]
       }
     ],
-    "callbacks":[
+    "callbacks": [
       {
-        "name":"incrementPlatformTargetPosition",
-        "functions":[
+        "name": "incrementPlatformTargetPosition",
+        "functions": [
           {
-            "name":"trigger"
+            "name": "trigger"
           },
           {
-            "name":"attachTo",
-            "parameters":[
+            "name": "attachTo",
+            "parameters": [
               "interrupt",
               "mode"
             ]
           },
           {
-            "name":"detachFrom",
-            "parameters":[
+            "name": "detachFrom",
+            "parameters": [
               "interrupt"
             ]
           },
           {
-            "name":"detachFromAll"
+            "name": "detachFromAll"
           }
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"interrupt",
-            "type":"string"
+            "name": "interrupt",
+            "type": "string"
           },
           {
-            "name":"mode",
-            "type":"string"
+            "name": "mode",
+            "type": "string"
           }
         ]
       },
       {
-        "name":"decrementPlatformTargetPosition",
-        "functions":[
+        "name": "decrementPlatformTargetPosition",
+        "functions": [
           {
-            "name":"trigger"
+            "name": "trigger"
           },
           {
-            "name":"attachTo",
-            "parameters":[
+            "name": "attachTo",
+            "parameters": [
               "interrupt",
               "mode"
             ]
           },
           {
-            "name":"detachFrom",
-            "parameters":[
+            "name": "detachFrom",
+            "parameters": [
               "interrupt"
             ]
           },
           {
-            "name":"detachFromAll"
+            "name": "detachFromAll"
           }
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"interrupt",
-            "type":"string"
+            "name": "interrupt",
+            "type": "string"
           },
           {
-            "name":"mode",
-            "type":"string"
+            "name": "mode",
+            "type": "string"
           }
         ]
       }

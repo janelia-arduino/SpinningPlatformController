@@ -30,24 +30,26 @@ License:
 
 ```json
 {
-  "id":"getApi",
-  "result":{
-    "firmware":["SpinningPlatformController"],
-    "verbosity":"NAMES",
-    "functions":[
+  "id": "getApi",
+  "result": {
+    "firmware": [
+      "SpinningPlatformController"
+    ],
+    "verbosity": "NAMES",
+    "functions": [
       "movePlatformSoftlyTo",
       "getPlatformPosition",
       "getPlatformTargetPosition",
       "platformAtTargetPosition"
     ],
-    "parameters":[
+    "parameters": [
       "platform_position"
     ],
-    "properties":[
+    "properties": [
       "platformPositionMin",
       "platformPositionMax"
     ],
-    "callbacks":[
+    "callbacks": [
       "incrementPlatformTargetPosition",
       "decrementPlatformTargetPosition"
     ]
