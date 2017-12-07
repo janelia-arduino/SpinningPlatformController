@@ -19,6 +19,9 @@ void SpinningPlatformController::setup()
   // Parent Setup
   StepperController::setup();
 
+  // Reset Watchdog
+  resetWatchdog();
+
   // Variable Setup
 
   // Set Device ID
