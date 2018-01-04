@@ -53,12 +53,12 @@ void SpinningPlatformController::setup()
 
   modular_server::Property & steps_per_position_units_property = modular_server_.property(step_dir_controller::constants::steps_per_position_units_property_name);
   steps_per_position_units_property.setDefaultValue(constants::steps_per_position_units_default);
-  steps_per_position_units_property.setValue(constants::steps_per_position_units_default);
+  steps_per_position_units_property.setValue(constants::steps_per_position_units_default,constants::CHANNEL_COUNT);
   steps_per_position_units_property.setRange(constants::steps_per_position_units,constants::steps_per_position_units);
 
   modular_server::Property & microsteps_per_step_property = modular_server_.property(stepper_controller::constants::microsteps_per_step_property_name);
   microsteps_per_step_property.setDefaultValue(constants::microsteps_per_step_default);
-  microsteps_per_step_property.setValue(constants::microsteps_per_step_default);
+  microsteps_per_step_property.setValue(constants::microsteps_per_step_default,constants::CHANNEL_COUNT);
   microsteps_per_step_property.setRange(constants::microsteps_per_step,constants::microsteps_per_step);
 
   modular_server_.createProperty(constants::platform_position_min_property_name,constants::platform_position_min_default);
