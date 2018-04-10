@@ -51,8 +51,8 @@ private:
   void getPlatformPositionHandler();
   void getPlatformTargetPositionHandler();
   void platformAtTargetPositionHandler();
-  void incrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr);
-  void decrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr);
+  void incrementPlatformTargetPositionHandler(modular_server::Pin * pin_ptr);
+  void decrementPlatformTargetPositionHandler(modular_server::Pin * pin_ptr);
 
 };
 

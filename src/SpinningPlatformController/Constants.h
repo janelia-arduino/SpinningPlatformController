@@ -38,7 +38,7 @@ extern const long microsteps_per_step;
 extern const long shaft_revs_per_platform_rev;
 extern const long microsteps_per_platform_rev;
 
-// Interrupts
+// Pins
 
 // Units
 

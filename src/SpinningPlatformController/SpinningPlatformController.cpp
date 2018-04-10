@@ -29,13 +29,13 @@ void SpinningPlatformController::setup()
 
   // Add Hardware
 
-  // Interrupts
-  modular_server::Interrupt & bnc_a_interrupt = modular_server_.interrupt(modular_device_base::constants::bnc_a_interrupt_name);
-  modular_server::Interrupt & btn_a_interrupt = modular_server_.interrupt(modular_device_base::constants::btn_a_interrupt_name);
+  // Pins
+  modular_server::Pin & bnc_a_pin = modular_server_.pin(modular_device_base::constants::bnc_a_pin_name);
+  modular_server::Pin & btn_a_pin = modular_server_.pin(modular_device_base::constants::btn_a_pin_name);
 
 #if defined(__MK64FX512__)
-  modular_server::Interrupt & bnc_b_interrupt = modular_server_.interrupt(modular_device_base::constants::bnc_b_interrupt_name);
-  modular_server::Interrupt & btn_b_interrupt = modular_server_.interrupt(modular_device_base::constants::btn_b_interrupt_name);
+  modular_server::Pin & bnc_b_pin = modular_server_.pin(modular_device_base::constants::bnc_b_pin_name);
+  modular_server::Pin & btn_b_pin = modular_server_.pin(modular_device_base::constants::btn_b_pin_name);
 #endif
 
   // Add Firmware
@@ -89,15 +89,15 @@ void SpinningPlatformController::setup()
 
   // Callbacks
   modular_server::Callback & increment_platform_target_position_callback = modular_server_.createCallback(constants::increment_platform_target_position_callback_name);
-  increment_platform_target_position_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&SpinningPlatformController::incrementPlatformTargetPositionHandler));
-  increment_platform_target_position_callback.attachTo(bnc_a_interrupt,modular_server::interrupt::mode_falling);
-  increment_platform_target_position_callback.attachTo(btn_a_interrupt,modular_server::interrupt::mode_falling);
+  increment_platform_target_position_callback.attachFunctor(makeFunctor((Functor1<modular_server::Pin *> *)0,*this,&SpinningPlatformController::incrementPlatformTargetPositionHandler));
+  increment_platform_target_position_callback.attachTo(bnc_a_pin,modular_server::pin::mode_falling);
+  increment_platform_target_position_callback.attachTo(btn_a_pin,modular_server::pin::mode_falling);
 
   modular_server::Callback & decrement_platform_target_position_callback = modular_server_.createCallback(constants::decrement_platform_target_position_callback_name);
-  decrement_platform_target_position_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&SpinningPlatformController::decrementPlatformTargetPositionHandler));
+  decrement_platform_target_position_callback.attachFunctor(makeFunctor((Functor1<modular_server::Pin *> *)0,*this,&SpinningPlatformController::decrementPlatformTargetPositionHandler));
 #if defined(__MK64FX512__)
-  decrement_platform_target_position_callback.attachTo(bnc_b_interrupt,modular_server::interrupt::mode_falling);
-  decrement_platform_target_position_callback.attachTo(btn_b_interrupt,modular_server::interrupt::mode_falling);
+  decrement_platform_target_position_callback.attachTo(bnc_b_pin,modular_server::pin::mode_falling);
+  decrement_platform_target_position_callback.attachTo(btn_b_pin,modular_server::pin::mode_falling);
 #endif
 
   zeroAll();
@@ -224,12 +224,12 @@ void SpinningPlatformController::platformAtTargetPositionHandler()
   modular_server_.response().returnResult(platform_at_target_position);
 }
 
-void SpinningPlatformController::incrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr)
+void SpinningPlatformController::incrementPlatformTargetPositionHandler(modular_server::Pin * pin_ptr)
 {
   incrementPlatformTargetPosition();
 }
 
-void SpinningPlatformController::decrementPlatformTargetPositionHandler(modular_server::Interrupt * interrupt_ptr)
+void SpinningPlatformController::decrementPlatformTargetPositionHandler(modular_server::Pin * pin_ptr)
 {
   decrementPlatformTargetPosition();
 }

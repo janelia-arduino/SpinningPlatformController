@@ -14,7 +14,7 @@ namespace spinning_platform_controller
 {
 namespace constants
 {
-// Interrupts
+// Pins
 
 // Units
 

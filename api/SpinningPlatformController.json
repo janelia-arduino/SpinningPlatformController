@@ -130,14 +130,14 @@
           {
             "name": "attachTo",
             "parameters": [
-              "interrupt",
+              "pin",
               "mode"
             ]
           },
           {
             "name": "detachFrom",
             "parameters": [
-              "interrupt"
+              "pin"
             ]
           },
           {
@@ -146,7 +146,7 @@
         ],
         "parameters": [
           {
-            "name": "interrupt",
+            "name": "pin",
             "type": "string"
           },
           {
@@ -164,14 +164,14 @@
           {
             "name": "attachTo",
             "parameters": [
-              "interrupt",
+              "pin",
               "mode"
             ]
           },
           {
             "name": "detachFrom",
             "parameters": [
-              "interrupt"
+              "pin"
             ]
           },
           {
@@ -180,7 +180,7 @@
         ],
         "parameters": [
           {
-            "name": "interrupt",
+            "name": "pin",
             "type": "string"
           },
           {
