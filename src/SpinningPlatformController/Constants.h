@@ -3,7 +3,7 @@
 //
 //
 // Authors:
-// Peter Polidoro polidorop@janelia.hhmi.org
+// Peter Polidoro peterpolidoro@gmail.com
 // ----------------------------------------------------------------------------
 #ifndef SPINNING_PLATFORM_CONTROLLER_CONSTANTS_H
 #define SPINNING_PLATFORM_CONTROLLER_CONSTANTS_H
