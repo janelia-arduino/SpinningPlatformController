@@ -103,7 +103,7 @@ void SpinningPlatformController::setup()
   zeroAll();
 }
 
-bool SpinningPlatformController::movePlatformSoftlyTo(const long absolute_platform_position)
+bool SpinningPlatformController::movePlatformSoftlyTo(long absolute_platform_position)
 {
   long position = limitedPlatformPosition(absolute_platform_position);
   position = platformPositionToPosition(position);
@@ -148,17 +148,17 @@ long SpinningPlatformController::decrementPlatformTargetPosition()
   return target_position;
 }
 
-long SpinningPlatformController::platformPositionToPosition(const long position)
+long SpinningPlatformController::platformPositionToPosition(long position)
 {
   return position*constants::microsteps_per_platform_rev;
 }
 
-long SpinningPlatformController::positionToPlatformPosition(const long position)
+long SpinningPlatformController::positionToPlatformPosition(long position)
 {
   return position/constants::microsteps_per_platform_rev;
 }
 
-long SpinningPlatformController::limitedPlatformPosition(const long absolute_platform_position)
+long SpinningPlatformController::limitedPlatformPosition(long absolute_platform_position)
 {
   long platform_position_min;
   modular_server_.property(constants::platform_position_min_property_name).getValue(platform_position_min);

@@ -28,7 +28,7 @@ public:
   SpinningPlatformController();
   virtual void setup();
 
-  bool movePlatformSoftlyTo(const long absolute_platform_position);
+  bool movePlatformSoftlyTo(long absolute_platform_position);
   long getPlatformPosition();
   long getPlatformTargetPosition();
   bool platformAtTargetPosition();
@@ -36,9 +36,9 @@ public:
   long incrementPlatformTargetPosition();
   long decrementPlatformTargetPosition();
 
-  long platformPositionToPosition(const long platform_position);
-  long positionToPlatformPosition(const long position);
-  long limitedPlatformPosition(const long absolute_platform_position);
+  long platformPositionToPosition(long platform_position);
+  long positionToPlatformPosition(long position);
+  long limitedPlatformPosition(long absolute_platform_position);
 
 private:
   modular_server::Property properties_[spinning_platform_controller::constants::PROPERTY_COUNT_MAX];
