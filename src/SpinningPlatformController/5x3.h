@@ -3,7 +3,7 @@
 //
 //
 // Authors:
-// Peter Polidoro peterpolidoro@gmail.com
+// Peter Polidoro peter@polidoro.io
 // ----------------------------------------------------------------------------
 #ifndef SPINNING_PLATFORM_CONTROLLER_5X3_CONSTANTS_H
 #define SPINNING_PLATFORM_CONTROLLER_5X3_CONSTANTS_H
